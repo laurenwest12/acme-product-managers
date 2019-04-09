@@ -23,10 +23,10 @@ app.get('/api/managers', (req, res, next) => {
 
 app.put('/api/products/:id', (req, res, next) => {
     console.log('put reached')
-    // Product.findByPk(req.params.id)
-    // .then(product => console.log('put', req.body))
-    // .then(product => res.send(product))
-    // .catch(next)
+    Product.findByPk(req.params.id)
+    .then(product => product.update(req.body))
+    .then(product => res.send(product))
+    .catch(next)
 })
 
 syncAndSeed()

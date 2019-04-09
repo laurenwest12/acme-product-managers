@@ -6,7 +6,7 @@ const mapDispatchToProps = ( dispatch ) => {
     return {
         getProductsThunk: () => dispatch(getProductsThunk()),
         getManagersThunk: () => dispatch(getManagersThunk()),
-        postManagerIdThunk: (product) => dispatch(postManagerIdThunk(product))
+        postManagerIdThunk: (id) => dispatch(postManagerIdThunk(id))
     }
 }
 
@@ -43,7 +43,7 @@ class Products extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        postManagerIdThunk(this.state.id)
+        postManagerIdThunk((this.state.id * 1))
    }
     
 
