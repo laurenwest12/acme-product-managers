@@ -33,7 +33,7 @@ const Nav = ({location: { pathname }, products, managers}) => {
                     <li key = {link.path} className = 'nav-item'>
                         <Link to = {link.path} className={`nav-link${link.path === pathname ? ' active': ''}`}>
                             {link.title} 
-                            {/* {managers && products && link.title === 'Managers' ?  findManager(products, managers).length : ''} */}
+                            {managers && products && link.title === 'Managers' ?  ' ' + findManager(products, managers).length : ''}
                         </Link>
                     </li>
                 ))

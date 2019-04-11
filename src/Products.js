@@ -6,7 +6,7 @@ const mapDispatchToProps = ( dispatch ) => {
     return {
         getProductsThunk: () => dispatch(getProductsThunk()),
         getManagersThunk: () => dispatch(getManagersThunk()),
-        postManagerIdThunk: (id) => dispatch(postManagerIdThunk(id))
+        postManagerIdThunk: (id, managerId) => dispatch(postManagerIdThunk(id, managerId))
     }
 }
 
@@ -18,9 +18,9 @@ const mapStateToProps = ( state ) => {
 }
 
 class Products extends Component {
-    async componentDidMount() {
-        await this.props.getProductsThunk()
-        await this.props.getManagersThunk()
+    componentDidMount() {
+        this.props.getProductsThunk()
+        this.props.getManagersThunk()
     }
 
     constructor() {
@@ -38,12 +38,11 @@ class Products extends Component {
             id: event.target.id,
             managerId: event.target.value
         })
-
     }
 
     handleSubmit(event) {
         event.preventDefault()
-        postManagerIdThunk((this.state.id * 1))
+        this.props.postManagerIdThunk(this.state.id, this.state.managerId)
    }
     
 

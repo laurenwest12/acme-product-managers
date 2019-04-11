@@ -69,12 +69,10 @@ export const getManagersThunk = () => {
     }
 }
 
-export const postManagerIdThunk = (product) => {
+export const postManagerIdThunk = (id, managerId) => {
     return (dispatch) => {
-        return axios.put(`/api/products/${product}`)
-            .then (() => console.log('thunk reached')
-            // dispatch(getProductsThunk())
-            )
+        return axios.put(`/api/products/${id}`, {managerId})
+            .then (() => dispatch(getProductsThunk()))
     }
 }
 

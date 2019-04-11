@@ -5,6 +5,10 @@ const {syncAndSeed, Manager, Product} = require ('./db/index')
 
 const port = process.env.PORT || 3000;
 
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 app.get('/app.js', (req, res, next)=> res.sendFile(path.join(__dirname, 'dist', 'main.js')));
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
@@ -22,9 +26,8 @@ app.get('/api/managers', (req, res, next) => {
 })
 
 app.put('/api/products/:id', (req, res, next) => {
-    console.log('put reached')
     Product.findByPk(req.params.id)
-    .then(product => product.update(req.body))
+    .then(product => product.update({managerId: req.body.managerId}))
     .then(product => res.send(product))
     .catch(next)
 })
